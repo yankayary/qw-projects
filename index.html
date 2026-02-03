@@ -287,6 +287,39 @@
             color: #28a745;
             font-weight: 600;
         }
+
+        /* Gallery Styles */
+        #imageGallery img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        #imageGallery img:hover {
+            transform: scale(1.05);
+        }
+        .gallery-item {
+            position: relative;
+        }
+        .delete-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: red;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            display: none;
+        }
+        .gallery-item:hover .delete-btn {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -501,6 +534,16 @@
                 <input type="color" id="buttonColorInp" value="#147ACC">
             </div>
 
+            <hr style="margin: 20px 0; border: none; border-top: 2px solid #ddd;">
+            <h3 style="color: #1a3a52; margin-top: 20px; margin-bottom: 15px;">📷 Galería de Imágenes</h3>
+
+            <div class="form-group">
+                <label>Subir Imagen</label>
+                <input type="file" id="imageUpload" accept="image/*" onchange="handleImageUpload(event)">
+            </div>
+
+            <div id="imageGallery" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 15px;"></div>
+
             <button class="save-btn" onclick="saveDat()">💾 Guardar</button>
             <div id="msgDiv" class="editor-message"></div>
         </div>
@@ -509,10 +552,71 @@
     <script>
         function openEd() {
             document.getElementById('editorMod').classList.add('active');
+            displayGallery();
         }
         
         function closeEd() {
             document.getElementById('editorMod').classList.remove('active');
+        }
+
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const images = JSON.parse(localStorage.getItem('siteImages') || '[]');
+                images.push(e.target.result);
+                localStorage.setItem('siteImages', JSON.stringify(images));
+                displayGallery();
+                document.getElementById('imageUpload').value = '';
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function displayGallery() {
+            const images = JSON.parse(localStorage.getItem('siteImages') || '[]');
+            const gallery = document.getElementById('imageGallery');
+            gallery.innerHTML = '';
+
+            images.forEach((img, idx) => {
+                const div = document.createElement('div');
+                div.className = 'gallery-item';
+                div.innerHTML = `
+                    <img src="${img}" alt="imagen">
+                    <button class="delete-btn" onclick="deleteImage(${idx})">✕</button>
+                `;
+                gallery.appendChild(div);
+            });
+        }
+
+        function deleteImage(idx) {
+            const images = JSON.parse(localStorage.getItem('siteImages') || '[]');
+            images.splice(idx, 1);
+            localStorage.setItem('siteImages', JSON.stringify(images));
+            displayGallery();
+        }
+
+        function showImagesOnSite() {
+            const images = JSON.parse(localStorage.getItem('siteImages') || '[]');
+            if (images.length === 0) return;
+
+            // Crear galería en la página si no existe
+            let galerySection = document.getElementById('siteGallery');
+            if (!galerySection) {
+                galerySection = document.createElement('section');
+                galerySection.id = 'siteGallery';
+                galerySection.innerHTML = '<h2>📸 Galería</h2><div id="siteGalleryImages" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 20px;"></div>';
+                document.querySelector('.container').appendChild(galerySection);
+            }
+
+            const galleryDiv = document.getElementById('siteGalleryImages');
+            galleryDiv.innerHTML = '';
+            images.forEach(img => {
+                const div = document.createElement('div');
+                div.innerHTML = `<img src="${img}" alt="galería" style="width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">`;
+                galleryDiv.appendChild(div);
+            });
         }
         
         function saveDat() {
@@ -548,6 +652,9 @@
             btns.forEach(btn => {
                 btn.style.background = 'linear-gradient(135deg, ' + d.bc + ' 0%, ' + d.bc.slice(0, -2) + 'aa 100%)';
             });
+
+            // Mostrar galería
+            showImagesOnSite();
             
             document.getElementById('msgDiv').innerHTML = '✅ Guardado';
             setTimeout(() => { document.getElementById('msgDiv').innerHTML = ''; }, 2000);
@@ -574,6 +681,9 @@
             if(d.tw) document.getElementById('twitterInp').value = d.tw;
             if(d.col) document.getElementById('colorInp').value = d.col;
             if(d.bc) document.getElementById('buttonColorInp').value = d.bc;
+
+            // Mostrar galería al cargar
+            showImagesOnSite();
         });
     </script>
 </body>
