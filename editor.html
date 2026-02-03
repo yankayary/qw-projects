@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor Visual - Legacy Mac Pros</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; padding: 20px; }
+        .container { max-width: 1400px; margin: 0 auto; }
+        .header { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #1a3a52; margin-bottom: 10px; }
+        .editor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .editor-panel { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .preview-panel { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); overflow: auto; max-height: 800px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; color: #1a3a52; }
+        input, textarea { width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 5px; font-family: inherit; font-size: 1em; }
+        input:focus, textarea:focus { outline: none; border-color: #147ACC; }
+        textarea { resize: vertical; min-height: 100px; }
+        button { background: linear-gradient(135deg, #147ACC 0%, #0e5aa8 100%); color: white; padding: 12px 30px; border: none; border-radius: 50px; cursor: pointer; font-weight: 600; font-size: 1em; }
+        button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(20, 122, 204, 0.4); }
+        .preview { padding: 20px; background: #f8f9fa; border-radius: 10px; }
+        .preview h2 { color: #1a3a52; margin-top: 20px; margin-bottom: 15px; }
+        .preview p { color: #444; line-height: 1.6; margin-bottom: 10px; }
+        .color-input { display: flex; gap: 10px; }
+        .color-input input[type="color"] { width: 50px; padding: 5px; }
+        .success { color: #28a745; font-weight: 600; margin-top: 10px; }
+        @media (max-width: 1024px) {
+            .editor-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✏️ Editor Visual - Legacy Mac Pros</h1>
+            <p>Edita el contenido de tu sitio de forma visual. Los cambios se guardan automáticamente.</p>
+        </div>
+
+        <div class="editor-grid">
+            <div class="editor-panel">
+                <h2>Editar Contenido</h2>
+                
+                <div class="form-group">
+                    <label>Título Principal (Header)</label>
+                    <input type="text" id="mainTitle" value="Legacy Mac Pros" placeholder="Título principal">
+                </div>
+
+                <div class="form-group">
+                    <label>Subtítulo</label>
+                    <input type="text" id="mainSubtitle" value="Optimize Your Old Mac, Boost Your Future." placeholder="Subtítulo">
+                </div>
+
+                <div class="form-group">
+                    <label>Color del Header (Azul principal)</label>
+                    <div class="color-input">
+                        <input type="color" id="headerColor" value="#1a3a52">
+                        <input type="text" id="headerColorText" value="#1a3a52">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Color Secundario (Botones)</label>
+                    <div class="color-input">
+                        <input type="color" id="buttonColor" value="#147ACC">
+                        <input type="text" id="buttonColorText" value="#147ACC">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Descripción "Who We Are"</label>
+                    <textarea id="whoWeAre" placeholder="Descripción...">Legacy Mac Pros TI is a specialized tech service that brings old Mac computers back to life. We optimize, upgrade, and modernize your Mac so it runs faster, smoother, and supports current macOS systems — all at a fraction of the cost of buying new.</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Teléfono de Contacto</label>
+                    <input type="text" id="phone" value="+52 415 167 1720">
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="email" value="qwprojects@outlook.com">
+                </div>
+
+                <button onclick="saveChanges()">💾 Guardar Cambios</button>
+                <div id="successMessage"></div>
+            </div>
+
+            <div class="preview-panel">
+                <h2>Vista Previa</h2>
+                <div class="preview">
+                    <div style="background: linear-gradient(135deg, #1a3a52 0%, #2d5a7b 50%, #3e6888 100%); color: white; padding: 40px; border-radius: 10px; text-align: center;">
+                        <h1 id="previewTitle" style="margin-bottom: 10px;">Legacy Mac Pros</h1>
+                        <p id="previewSubtitle" style="font-size: 1.2em;">Optimize Your Old Mac, Boost Your Future.</p>
+                    </div>
+
+                    <h2 id="previewH2" style="color: #1a3a52; margin-top: 30px;">🔧 Who We Are</h2>
+                    <p id="previewWhoWeAre">Legacy Mac Pros TI is a specialized tech service...</p>
+
+                    <h2 style="color: #1a3a52; margin-top: 30px;">📞 Contacto</h2>
+                    <p>Teléfono: <strong id="previewPhone">+52 415 167 1720</strong></p>
+                    <p>Email: <strong id="previewEmail">qwprojects@outlook.com</strong></p>
+
+                    <button id="previewButton" style="margin-top: 20px; background: linear-gradient(135deg, #147ACC 0%, #0e5aa8 100%);">🟢 Contactar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Cargar datos guardados
+        function loadData() {
+            const saved = localStorage.getItem('siteData');
+            if (saved) {
+                const data = JSON.parse(saved);
+                document.getElementById('mainTitle').value = data.title || 'Legacy Mac Pros';
+                document.getElementById('mainSubtitle').value = data.subtitle || 'Optimize Your Old Mac, Boost Your Future.';
+                document.getElementById('headerColor').value = data.headerColor || '#1a3a52';
+                document.getElementById('headerColorText').value = data.headerColor || '#1a3a52';
+                document.getElementById('buttonColor').value = data.buttonColor || '#147ACC';
+                document.getElementById('buttonColorText').value = data.buttonColor || '#147ACC';
+                document.getElementById('whoWeAre').value = data.whoWeAre || '';
+                document.getElementById('phone').value = data.phone || '';
+                document.getElementById('email').value = data.email || '';
+            }
+            updatePreview();
+        }
+
+        // Sincronizar color
+        document.getElementById('headerColor').addEventListener('input', (e) => {
+            document.getElementById('headerColorText').value = e.target.value;
+            updatePreview();
+        });
+        document.getElementById('buttonColor').addEventListener('input', (e) => {
+            document.getElementById('buttonColorText').value = e.target.value;
+            updatePreview();
+        });
+
+        // Actualizar preview en tiempo real
+        document.getElementById('mainTitle').addEventListener('input', updatePreview);
+        document.getElementById('mainSubtitle').addEventListener('input', updatePreview);
+        document.getElementById('whoWeAre').addEventListener('input', updatePreview);
+        document.getElementById('phone').addEventListener('input', updatePreview);
+        document.getElementById('email').addEventListener('input', updatePreview);
+
+        function updatePreview() {
+            document.getElementById('previewTitle').textContent = document.getElementById('mainTitle').value;
+            document.getElementById('previewSubtitle').textContent = document.getElementById('mainSubtitle').value;
+            document.getElementById('previewWhoWeAre').textContent = document.getElementById('whoWeAre').value;
+            document.getElementById('previewPhone').textContent = document.getElementById('phone').value;
+            document.getElementById('previewEmail').textContent = document.getElementById('email').value;
+        }
+
+        function saveChanges() {
+            const data = {
+                title: document.getElementById('mainTitle').value,
+                subtitle: document.getElementById('mainSubtitle').value,
+                headerColor: document.getElementById('headerColor').value,
+                buttonColor: document.getElementById('buttonColor').value,
+                whoWeAre: document.getElementById('whoWeAre').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value
+            };
+            localStorage.setItem('siteData', JSON.stringify(data));
+            
+            const msg = document.getElementById('successMessage');
+            msg.innerHTML = '✅ Cambios guardados localmente';
+            setTimeout(() => {
+                msg.innerHTML = '';
+            }, 3000);
+        }
+
+        // Cargar al abrir
+        loadData();
+    </script>
+</body>
+</html>
