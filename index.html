@@ -332,5 +332,284 @@
         <p>&copy; 2026 Legacy Mac Pros TI. All rights reserved.</p>
         <p>Created by Yan Kayary</p>
     </footer>
+
+    <!-- Editor Visual Flotante -->
+    <button id="editorButton" class="editor-float-button" title="Abrir editor visual">✏️ EDITAR</button>
+    <div id="editorModal" class="editor-modal">
+        <div class="editor-modal-content">
+            <button class="editor-close" onclick="closeEditor()">✕</button>
+            <h2>✏️ Editor Visual</h2>
+            
+            <div class="editor-tabs">
+                <button class="tab-btn active" onclick="switchTab('content')">Contenido</button>
+                <button class="tab-btn" onclick="switchTab('colors')">Colores</button>
+            </div>
+
+            <div id="content-tab" class="tab-content active">
+                <div class="form-group">
+                    <label>Título Principal</label>
+                    <input type="text" id="mainTitle" placeholder="Legacy Mac Pros">
+                </div>
+                <div class="form-group">
+                    <label>Descripción "Who We Are"</label>
+                    <textarea id="whoWeAre" placeholder="Descripción..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Teléfono</label>
+                    <input type="text" id="phone" placeholder="+52 415 167 1720">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="email" placeholder="qwprojects@outlook.com">
+                </div>
+            </div>
+
+            <div id="colors-tab" class="tab-content">
+                <div class="form-group">
+                    <label>Color Encabezado (Azul principal)</label>
+                    <input type="color" id="headerColor">
+                </div>
+                <div class="form-group">
+                    <label>Color Botones</label>
+                    <input type="color" id="buttonColor">
+                </div>
+            </div>
+
+            <button class="save-btn" onclick="saveEditorChanges()">💾 Guardar Cambios</button>
+            <div id="editorMessage" class="editor-message"></div>
+        </div>
+    </div>
+
+    <style>
+        .editor-float-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #147ACC 0%, #0e5aa8 100%);
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1em;
+            box-shadow: 0 6px 20px rgba(20, 122, 204, 0.4);
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+        .editor-float-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(20, 122, 204, 0.6);
+        }
+
+        .editor-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        .editor-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .editor-modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+        .editor-modal-content h2 {
+            color: #1a3a52;
+            margin-bottom: 20px;
+        }
+
+        .editor-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #999;
+        }
+        .editor-close:hover {
+            color: #333;
+        }
+
+        .editor-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            color: #999;
+            font-weight: 600;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .tab-btn.active {
+            color: #147ACC;
+            border-bottom-color: #147ACC;
+        }
+
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1a3a52;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1em;
+        }
+        .form-group textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #147ACC;
+            box-shadow: 0 0 8px rgba(20, 122, 204, 0.2);
+        }
+
+        .save-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #147ACC 0%, #0e5aa8 100%);
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+        .save-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(20, 122, 204, 0.4);
+        }
+
+        .editor-message {
+            margin-top: 10px;
+            text-align: center;
+            color: #28a745;
+            font-weight: 600;
+        }
+    </style>
+
+    <script>
+        // Elementos del editor
+        const editorButton = document.getElementById('editorButton');
+        const editorModal = document.getElementById('editorModal');
+
+        // Abrir editor
+        editorButton.addEventListener('click', () => {
+            editorModal.classList.add('active');
+            loadEditorData();
+        });
+
+        // Cerrar editor
+        function closeEditor() {
+            editorModal.classList.remove('active');
+        }
+
+        // Cambiar tabs
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabName + '-tab').classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Cargar datos guardados
+        function loadEditorData() {
+            const saved = localStorage.getItem('legacyMacProData');
+            if (saved) {
+                const data = JSON.parse(saved);
+                document.getElementById('mainTitle').value = data.title || '';
+                document.getElementById('whoWeAre').value = data.whoWeAre || '';
+                document.getElementById('phone').value = data.phone || '';
+                document.getElementById('email').value = data.email || '';
+                document.getElementById('headerColor').value = data.headerColor || '#1a3a52';
+                document.getElementById('buttonColor').value = data.buttonColor || '#147ACC';
+            }
+        }
+
+        // Guardar cambios
+        function saveEditorChanges() {
+            const data = {
+                title: document.getElementById('mainTitle').value,
+                whoWeAre: document.getElementById('whoWeAre').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                headerColor: document.getElementById('headerColor').value,
+                buttonColor: document.getElementById('buttonColor').value
+            };
+            
+            localStorage.setItem('legacyMacProData', JSON.stringify(data));
+            
+            // Actualizar página
+            updatePageWithEditorData(data);
+            
+            // Mostrar mensaje
+            const msg = document.getElementById('editorMessage');
+            msg.textContent = '✅ Cambios guardados';
+            setTimeout(() => {
+                msg.textContent = '';
+            }, 3000);
+        }
+
+        // Aplicar cambios a la página
+        function updatePageWithEditorData(data) {
+            if (data.title) {
+                document.querySelectorAll('h1').forEach(h => {
+                    if (h.textContent.includes('Legacy Mac Pros')) {
+                        h.textContent = data.title;
+                    }
+                });
+            }
+        }
+
+        // Cargar datos al abrir la página
+        window.addEventListener('load', () => {
+            const saved = localStorage.getItem('legacyMacProData');
+            if (saved) {
+                updatePageWithEditorData(JSON.parse(saved));
+            }
+        });
+    </script>
 </body>
 </html>
