@@ -417,6 +417,11 @@
             <h2>✏️ Editor Visual</h2>
             
             <div class="form-group">
+                <label>Nombre de la Empresa</label>
+                <input type="text" id="companyInp" placeholder="Legacy Mac Pros">
+            </div>
+
+            <div class="form-group">
                 <label>Título Principal</label>
                 <input type="text" id="titleInp" placeholder="Legacy Mac Pros">
             </div>
@@ -432,17 +437,37 @@
             </div>
 
             <div class="form-group">
+                <label>Descripción "Why Choose Us"</label>
+                <textarea id="whyInp" placeholder="Por qué elegir tu servicio..."></textarea>
+            </div>
+
+            <div class="form-group">
                 <label>Descripción de Servicios</label>
                 <textarea id="servicesDescInp" placeholder="Qué servicios ofreces..."></textarea>
             </div>
             
             <div class="form-group">
-                <label>Teléfono</label>
-                <input type="text" id="phoneInp" placeholder="+52 415 167 1720">
+                <label>📍 Ubicación/Dirección</label>
+                <input type="text" id="locationInp" placeholder="Ciudad, País">
+            </div>
+
+            <div class="form-group">
+                <label>🕐 Horario de Atención</label>
+                <input type="text" id="hoursInp" placeholder="Lunes a Viernes 9AM-6PM">
             </div>
             
             <div class="form-group">
-                <label>Email</label>
+                <label>📞 Teléfono</label>
+                <input type="text" id="phoneInp" placeholder="+52 415 167 1720">
+            </div>
+
+            <div class="form-group">
+                <label>💬 WhatsApp</label>
+                <input type="text" id="whatsappInp" placeholder="+52 415 167 1720">
+            </div>
+            
+            <div class="form-group">
+                <label>📧 Email</label>
                 <input type="email" id="emailInp" placeholder="qwprojects@outlook.com">
             </div>
 
@@ -457,12 +482,22 @@
             </div>
 
             <div class="form-group">
-                <label>Color Encabezado</label>
+                <label>LinkedIn URL</label>
+                <input type="text" id="linkedinInp" placeholder="https://linkedin.com/...">
+            </div>
+
+            <div class="form-group">
+                <label>Twitter/X URL</label>
+                <input type="text" id="twitterInp" placeholder="https://twitter.com/...">
+            </div>
+
+            <div class="form-group">
+                <label>🎨 Color Encabezado</label>
                 <input type="color" id="colorInp" value="#1a3a52">
             </div>
 
             <div class="form-group">
-                <label>Color Botones</label>
+                <label>🎨 Color Botones</label>
                 <input type="color" id="buttonColorInp" value="#147ACC">
             </div>
 
@@ -482,15 +517,22 @@
         
         function saveDat() {
             const d = {
+                c: document.getElementById('companyInp').value,
                 t: document.getElementById('titleInp').value,
                 st: document.getElementById('subtitleInp').value,
                 d: document.getElementById('descInp').value,
+                w: document.getElementById('whyInp').value,
                 sd: document.getElementById('servicesDescInp').value,
+                l: document.getElementById('locationInp').value,
+                h: document.getElementById('hoursInp').value,
                 p: document.getElementById('phoneInp').value,
+                wa: document.getElementById('whatsappInp').value,
                 e: document.getElementById('emailInp').value,
                 fb: document.getElementById('facebookInp').value,
                 ig: document.getElementById('instagramInp').value,
-                c: document.getElementById('colorInp').value,
+                li: document.getElementById('linkedinInp').value,
+                tw: document.getElementById('twitterInp').value,
+                col: document.getElementById('colorInp').value,
                 bc: document.getElementById('buttonColorInp').value
             };
             localStorage.setItem('siteData', JSON.stringify(d));
@@ -499,7 +541,7 @@
             document.querySelector('header h1').textContent = d.t;
             document.querySelector('.subtitle').textContent = d.st;
             document.querySelectorAll('section')[0].querySelector('p').textContent = d.d;
-            document.querySelector('header').style.background = 'linear-gradient(135deg, ' + d.c + ' 0%, ' + d.c + 'dd 50%, ' + d.c + '99 100%)';
+            document.querySelector('header').style.background = 'linear-gradient(135deg, ' + d.col + ' 0%, ' + d.col + 'dd 50%, ' + d.col + '99 100%)';
             
             // Cambiar color de botones
             const btns = document.querySelectorAll('.button');
@@ -515,15 +557,22 @@
         
         window.addEventListener('load', () => {
             const d = JSON.parse(localStorage.getItem('siteData') || '{}');
+            if(d.c) document.getElementById('companyInp').value = d.c;
             if(d.t) document.getElementById('titleInp').value = d.t;
             if(d.st) document.getElementById('subtitleInp').value = d.st;
             if(d.d) document.getElementById('descInp').value = d.d;
+            if(d.w) document.getElementById('whyInp').value = d.w;
             if(d.sd) document.getElementById('servicesDescInp').value = d.sd;
+            if(d.l) document.getElementById('locationInp').value = d.l;
+            if(d.h) document.getElementById('hoursInp').value = d.h;
             if(d.p) document.getElementById('phoneInp').value = d.p;
+            if(d.wa) document.getElementById('whatsappInp').value = d.wa;
             if(d.e) document.getElementById('emailInp').value = d.e;
             if(d.fb) document.getElementById('facebookInp').value = d.fb;
             if(d.ig) document.getElementById('instagramInp').value = d.ig;
-            if(d.c) document.getElementById('colorInp').value = d.c;
+            if(d.li) document.getElementById('linkedinInp').value = d.li;
+            if(d.tw) document.getElementById('twitterInp').value = d.tw;
+            if(d.col) document.getElementById('colorInp').value = d.col;
             if(d.bc) document.getElementById('buttonColorInp').value = d.bc;
         });
     </script>
