@@ -6,7 +6,6 @@
     <title>Legacy Mac Pros - Revive Your Old Mac</title>
     <meta name="description" content="Legacy Mac Pros TI - Optimize, upgrade, and modernize your old Mac">
     <meta name="robots" content="index, follow">
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
@@ -98,34 +97,13 @@
             color: #444;
         }
         ul, ol { 
-            margin: 25px 0 25px 35px; 
-            padding-left: 10px;
+            margin: 20px 0 20px 40px; 
+            font-size: 1.08em;
         }
         li { 
             margin-bottom: 15px; 
-            font-size: 1.05em;
-            color: #444;
             line-height: 1.8;
         }
-        a { 
-            color: #147ACC; 
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            position: relative;
-        }
-        a::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #147ACC;
-            transition: width 0.3s;
-        }
-        a:hover::after { width: 100%; }
-        a:hover { color: #0e5aa8; }
         .button { 
             display: inline-block; 
             background: linear-gradient(135deg, #147ACC 0%, #0e5aa8 100%);
@@ -138,66 +116,47 @@
             font-size: 1.1em;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 6px 20px rgba(20, 122, 204, 0.5);
-            border: none;
-            cursor: pointer;
-            letter-spacing: 0.5px;
         }
-        .button:hover { 
-            background: linear-gradient(135deg, #0e5aa8 0%, #094285 100%);
-            box-shadow: 0 10px 35px rgba(20, 122, 204, 0.7);
-            transform: translateY(-3px);
+        .button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(20, 122, 204, 0.7);
+            text-decoration: none;
         }
-        .button:active {
-            transform: translateY(-1px);
+        .icon-section { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 30px; 
+            margin: 40px 0;
         }
+        .icon-item { 
+            padding: 30px; 
+            background: linear-gradient(135deg, #f0f7ff 0%, #e8f2ff 100%);
+            border-left: 4px solid #147ACC;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        .icon-item:hover { 
+            transform: translateX(10px);
+            box-shadow: 0 5px 20px rgba(20, 122, 204, 0.2);
+        }
+        .icon-item h4 { margin-top: 0; }
         .info-box { 
-            background: linear-gradient(135deg, #f0f7ff 0%, #e6f0ff 100%);
-            padding: 40px;
-            border-left: 6px solid #147ACC; 
-            margin: 35px 0; 
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(20, 122, 204, 0.15);
-        }
-        .info-box p { 
-            margin: 14px 0;
-            color: #333;
-        }
-        .highlight-text {
-            color: #147ACC;
-            font-weight: 700;
-        }
-        .icon-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
+            background: #f0f7ff; 
+            padding: 30px; 
+            border-left: 4px solid #147ACC;
+            border-radius: 10px;
             margin: 30px 0;
         }
-        .icon-item {
-            padding: 25px;
-            background: linear-gradient(135deg, #f8fbff 0%, #f0f7ff 100%);
-            border-radius: 10px;
-            border-left: 4px solid #147ACC;
-            transition: all 0.3s;
-        }
-        .icon-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(20, 122, 204, 0.2);
-        }
         footer { 
-            background: linear-gradient(135deg, #1a3a52 0%, #2d5a7b 100%);
+            background: #1a3a52; 
             color: white; 
-            padding: 60px 20px;
             text-align: center; 
+            padding: 40px 20px;
             margin-top: 100px;
         }
         footer p { 
             margin: 10px 0;
             font-size: 1.05em;
-        }
-        .divider {
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #147ACC, transparent);
-            margin: 40px 0;
         }
         @media (max-width: 768px) {
             header h1 { font-size: 2.5em; padding: 20px 0; }
@@ -207,7 +166,7 @@
             .icon-section { grid-template-columns: 1fr; }
         }
 
-        /* EDITOR STYLES */
+        /* EDITOR BUTTON */
         .editor-float-button {
             position: fixed;
             bottom: 30px;
@@ -238,7 +197,6 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.7);
             z-index: 1000;
-            overflow-y: auto;
         }
         .editor-modal.active {
             display: flex;
@@ -254,10 +212,13 @@
             width: 90%;
             position: relative;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            max-height: 80vh;
+            overflow-y: auto;
         }
         .editor-modal-content h2 {
             color: #1a3a52;
             margin-bottom: 20px;
+            margin-top: 0;
         }
 
         .editor-close {
@@ -272,34 +233,6 @@
         }
         .editor-close:hover {
             color: #333;
-        }
-
-        .editor-tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #e0e0e0;
-        }
-        .tab-btn {
-            background: none;
-            border: none;
-            padding: 10px 15px;
-            cursor: pointer;
-            color: #999;
-            font-weight: 600;
-            border-bottom: 3px solid transparent;
-            transition: all 0.3s ease;
-        }
-        .tab-btn.active {
-            color: #147ACC;
-            border-bottom-color: #147ACC;
-        }
-
-        .tab-content {
-            display: none;
-        }
-        .tab-content.active {
-            display: block;
         }
 
         .form-group {
@@ -320,26 +253,12 @@
             font-family: inherit;
             font-size: 1em;
         }
-        .form-group select {
-            width: 100%;
-            padding: 10px;
-            border: 2px solid #e0e0e0;
-            border-radius: 5px;
-            font-family: inherit;
-            font-size: 1em;
-            cursor: pointer;
-        }
-        .form-group input[type="range"] {
-            width: 100%;
-            cursor: pointer;
-        }
         .form-group textarea {
             min-height: 80px;
             resize: vertical;
         }
         .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
+        .form-group textarea:focus {
             outline: none;
             border-color: #147ACC;
             box-shadow: 0 0 8px rgba(20, 122, 204, 0.2);
@@ -368,58 +287,6 @@
             color: #28a745;
             font-weight: 600;
         }
-
-        /* Imagen Upload */
-        .image-upload-area {
-            border: 2px dashed #147ACC;
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-            background: #f0f7ff;
-            transition: all 0.3s;
-        }
-        .image-upload-area:hover {
-            background: #e8f2ff;
-            border-color: #0e5aa8;
-        }
-
-        .image-gallery {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-top: 15px;
-        }
-        .gallery-item {
-            position: relative;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        .gallery-item img {
-            width: 100%;
-            height: 100px;
-            object-fit: cover;
-            cursor: pointer;
-        }
-        .gallery-item .delete-img {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background: red;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 25px;
-            height: 25px;
-            cursor: pointer;
-            font-size: 0.8em;
-        }
-
-        .effects-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
     </style>
 </head>
 <body>
@@ -430,18 +297,12 @@
 
     <div class="container">
         <section>
-            <h2>🧑‍💻 Is Your Mac Slowing Down?</h2>
-            <h3>Don't Buy a New One Just Yet!</h3>
-            <p>At Legacy Mac Pros TI, we help you revive and supercharge your old Mac — faster, smoother, and updated to modern standards, for a fraction of the cost of a new machine.</p>
-        </section>
-
-        <section>
             <h2>🔧 Who We Are</h2>
             <p>Legacy Mac Pros TI is a specialized tech service that brings old Mac computers back to life. We optimize, upgrade, and modernize your Mac so it runs faster, smoother, and supports current macOS systems — all at a fraction of the cost of buying new.</p>
         </section>
 
         <section>
-            <h2>⚙️ Our Services Include:</h2>
+            <h2>⚡ Services We Offer</h2>
             <div class="icon-section">
                 <div class="icon-item">
                     <h4>💾 SSD Installation</h4>
@@ -474,17 +335,19 @@
         </section>
 
         <section>
-            <h2>🚀 What We Do for You</h2>
+            <h2>🔧 What We Do</h2>
+            <h3>Mac Optimization Service</h3>
             <ul>
-                <li>✅ Install lightning-fast SSD and upgrade your RAM</li>
-                <li>✅ Make your Mac compatible with the latest macOS</li>
-                <li>✅ Optimize your system for faster performance and stability</li>
-                <li>✅ Provide professional internal cleaning and thermal tuning</li>
+                <li>🖥️ SSD (Solid State Drive) Installation — Replace slow HDDs</li>
+                <li>🚀 RAM Memory Upgrades — Maximize multitasking capability</li>
+                <li>📱 macOS Compatibility Solutions — Run latest OS on older Macs</li>
+                <li>🧊 Thermal & Performance Tuning — Professional cleaning & optimization</li>
+                <li>✅ Quality Assurance Testing — Every Mac is tested before delivery</li>
             </ul>
         </section>
 
         <section>
-            <h2>💰 Why It's Worth It</h2>
+            <h2>💰 Why Is It Worth It?</h2>
             <ul>
                 <li>Save hundreds of dollars instead of buying a new Mac</li>
                 <li>Your Mac will run faster, smoother, and more efficiently</li>
@@ -512,15 +375,14 @@
                 <li>MacBook Air (2011–2017)</li>
                 <li>Mac Mini (2011–2014)</li>
             </ul>
-            <p><em>Not sure about your Mac? Contact us and we'll check compatibility!</em></p>
         </section>
 
         <section>
-            <h2>💼 Work With Us – Join Our Sales Network</h2>
-            <p>Are you a technician, freelancer or tech-savvy seller?</p>
-            <p>Become a partner and earn commissions helping others revive their Macs!</p>
+            <h2>🚀 Business Opportunity</h2>
             <ul>
-                <li>🔥 High commissions per sale</li>
+                <li>💼 High-profit margin business model</li>
+                <li>📞 Strong customer support and marketing materials</li>
+                <li>💡 Complete business systems and training provided</li>
                 <li>📘 Full training and support</li>
                 <li>🚫 No investment required</li>
                 <li>📍 Exclusive sales zones available</li>
@@ -547,268 +409,79 @@
         <p>Created by Yan Kayary</p>
     </footer>
 
-    <!-- Editor Visual Flotante -->
-    <button id="editorButton" class="editor-float-button" title="Abrir editor visual">✏️ EDITAR</button>
-    <div id="editorModal" class="editor-modal">
+    <!-- Editor Visual -->
+    <button id="editorBtn" class="editor-float-button">✏️ EDITAR</button>
+    <div id="editorMod" class="editor-modal">
         <div class="editor-modal-content">
-            <button class="editor-close" onclick="closeEditor()">✕</button>
+            <button class="editor-close" onclick="closeEd()">✕</button>
             <h2>✏️ Editor Visual</h2>
             
-            <div class="editor-tabs">
-                <button class="tab-btn active" onclick="switchTab('content')">Contenido</button>
-                <button class="tab-btn" onclick="switchTab('images')">Imágenes</button>
-                <button class="tab-btn" onclick="switchTab('colors')">Colores</button>
-                <button class="tab-btn" onclick="switchTab('effects')">Efectos</button>
+            <div class="form-group">
+                <label>Título Principal</label>
+                <input type="text" id="titleInp" placeholder="Legacy Mac Pros">
+            </div>
+            
+            <div class="form-group">
+                <label>Descripción "Who We Are"</label>
+                <textarea id="descInp" placeholder="Descripción..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>Teléfono</label>
+                <input type="text" id="phoneInp" placeholder="+52 415 167 1720">
+            </div>
+            
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="emailInp" placeholder="qwprojects@outlook.com">
             </div>
 
-            <div id="content-tab" class="tab-content active">
-                <div class="form-group">
-                    <label>Título Principal</label>
-                    <input type="text" id="mainTitle" placeholder="Legacy Mac Pros">
-                </div>
-                <div class="form-group">
-                    <label>Descripción "Who We Are"</label>
-                    <textarea id="whoWeAre" placeholder="Descripción..."></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Teléfono</label>
-                    <input type="text" id="phone" placeholder="+52 415 167 1720">
-                </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" id="email" placeholder="qwprojects@outlook.com">
-                </div>
+            <div class="form-group">
+                <label>Color Encabezado</label>
+                <input type="color" id="colorInp" value="#1a3a52">
             </div>
 
-            <div id="colors-tab" class="tab-content">
-                <div class="form-group">
-                    <label>Color Encabezado (Azul principal)</label>
-                    <input type="color" id="headerColor">
-                </div>
-                <div class="form-group">
-                    <label>Color Botones</label>
-                    <input type="color" id="buttonColor">
-                </div>
-            </div>
-
-            <div id="images-tab" class="tab-content">
-                <div class="form-group">
-                    <label>📷 Subir Imagen</label>
-                    <div class="image-upload-area" onclick="document.getElementById('imageInput').click()">
-                        Haz clic o arrastra una imagen aquí
-                    </div>
-                    <input type="file" id="imageInput" accept="image/*" style="display: none;" onchange="handleImageUpload(event)">
-                </div>
-                <div id="imageGallery" class="image-gallery"></div>
-            </div>
-
-            <div id="effects-tab" class="tab-content">
-                <div class="effects-grid">
-                    <div class="form-group">
-                        <label>Sombra (Shadow)</label>
-                        <select id="shadowLevel">
-                            <option value="none">Sin sombra</option>
-                            <option value="small" selected>Pequeña</option>
-                            <option value="medium">Media</option>
-                            <option value="large">Grande</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Redondeado (Radius)</label>
-                        <select id="borderRadius">
-                            <option value="5">Poco redondeado</option>
-                            <option value="15" selected>Medio</option>
-                            <option value="25">Muy redondeado</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="effects-grid">
-                    <div class="form-group">
-                        <label>Opacidad (Transparency)</label>
-                        <input type="range" id="opacity" min="0.5" max="1" step="0.1" value="1">
-                    </div>
-                    <div class="form-group">
-                        <label>Escala (Zoom)</label>
-                        <input type="range" id="scale" min="0.8" max="1.2" step="0.1" value="1">
-                    </div>
-                </div>
-            </div>
-
-            <button class="save-btn" onclick="saveEditorChanges()">💾 Guardar Cambios</button>
-            <div id="editorMessage" class="editor-message"></div>
+            <button class="save-btn" onclick="saveDat()">💾 Guardar</button>
+            <div id="msgDiv" class="editor-message"></div>
         </div>
     </div>
 
     <script>
-        // Elementos del editor
-        let editorButton, editorModal;
-
-        // Inicializar cuando el DOM esté listo
-        document.addEventListener('DOMContentLoaded', () => {
-            editorButton = document.getElementById('editorButton');
-            editorModal = document.getElementById('editorModal');
-
-            // Abrir editor
-            if (editorButton) {
-                editorButton.addEventListener('click', () => {
-                    editorModal.classList.add('active');
-                    loadEditorData();
-                });
-            }
-
-            // Cargar datos al abrir la página
-            const saved = localStorage.getItem('legacyMacProData');
-            if (saved) {
-                const data = JSON.parse(saved);
-                updatePageWithEditorData(data);
-                applyEffects();
-            }
-            displayImageGallery();
-        });
-
-        // Cerrar editor
-        function closeEditor() {
-            editorModal.classList.remove('active');
+        function openEd() {
+            document.getElementById('editorMod').classList.add('active');
         }
-
-        // Cambiar tabs
-        function switchTab(tabName) {
-            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            
-            document.getElementById(tabName + '-tab').classList.add('active');
-            event.target.classList.add('active');
+        
+        function closeEd() {
+            document.getElementById('editorMod').classList.remove('active');
         }
-
-        // Cargar datos guardados
-        function loadEditorData() {
-            const saved = localStorage.getItem('legacyMacProData');
-            if (saved) {
-                const data = JSON.parse(saved);
-                document.getElementById('mainTitle').value = data.title || '';
-                document.getElementById('whoWeAre').value = data.whoWeAre || '';
-                document.getElementById('phone').value = data.phone || '';
-                document.getElementById('email').value = data.email || '';
-                document.getElementById('headerColor').value = data.headerColor || '#1a3a52';
-                document.getElementById('buttonColor').value = data.buttonColor || '#147ACC';
-            }
-        }
-
-        // Guardar cambios
-        function saveEditorChanges() {
-            const data = {
-                title: document.getElementById('mainTitle').value,
-                whoWeAre: document.getElementById('whoWeAre').value,
-                phone: document.getElementById('phone').value,
-                email: document.getElementById('email').value,
-                headerColor: document.getElementById('headerColor').value,
-                buttonColor: document.getElementById('buttonColor').value,
-                shadowLevel: document.getElementById('shadowLevel').value,
-                borderRadius: document.getElementById('borderRadius').value,
-                opacity: document.getElementById('opacity').value,
-                scale: document.getElementById('scale').value,
-                images: JSON.parse(localStorage.getItem('siteImages') || '[]')
+        
+        function saveDat() {
+            const d = {
+                t: document.getElementById('titleInp').value,
+                d: document.getElementById('descInp').value,
+                p: document.getElementById('phoneInp').value,
+                e: document.getElementById('emailInp').value,
+                c: document.getElementById('colorInp').value
             };
+            localStorage.setItem('siteData', JSON.stringify(d));
             
-            localStorage.setItem('legacyMacProData', JSON.stringify(data));
+            document.querySelector('header h1').textContent = d.t;
+            document.querySelectorAll('section')[0].querySelector('p').textContent = d.d;
+            document.querySelector('header').style.background = 'linear-gradient(135deg, ' + d.c + ' 0%, ' + d.c + 'dd 50%, ' + d.c + '99 100%)';
             
-            // Actualizar página
-            updatePageWithEditorData(data);
-            applyEffects();
-            
-            // Mostrar mensaje
-            const msg = document.getElementById('editorMessage');
-            msg.textContent = '✅ Cambios guardados';
-            setTimeout(() => {
-                msg.textContent = '';
-            }, 3000);
+            document.getElementById('msgDiv').innerHTML = '✅ Guardado';
+            setTimeout(() => { document.getElementById('msgDiv').innerHTML = ''; }, 2000);
         }
-
-        // Subir imagen
-        function handleImageUpload(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                const images = JSON.parse(localStorage.getItem('siteImages') || '[]');
-                images.push(e.target.result);
-                localStorage.setItem('siteImages', JSON.stringify(images));
-                displayImageGallery();
-            };
-            reader.readAsDataURL(file);
-        }
-
-        // Mostrar galería de imágenes
-        function displayImageGallery() {
-            const images = JSON.parse(localStorage.getItem('siteImages') || '[]');
-            const gallery = document.getElementById('imageGallery');
-            gallery.innerHTML = '';
-            
-            images.forEach((img, idx) => {
-                const div = document.createElement('div');
-                div.className = 'gallery-item';
-                div.innerHTML = `
-                    <img src="${img}" alt="Imagen ${idx}">
-                    <button class="delete-img" onclick="deleteImage(${idx})">✕</button>
-                `;
-                gallery.appendChild(div);
-            });
-        }
-
-        // Eliminar imagen
-        function deleteImage(idx) {
-            const images = JSON.parse(localStorage.getItem('siteImages') || '[]');
-            images.splice(idx, 1);
-            localStorage.setItem('siteImages', JSON.stringify(images));
-            displayImageGallery();
-        }
-
-        // Aplicar efectos visuales
-        function applyEffects() {
-            const opacity = document.getElementById('opacity').value || 1;
-            const scale = document.getElementById('scale').value || 1;
-            const radius = document.getElementById('borderRadius').value || 15;
-            const shadow = document.getElementById('shadowLevel').value || 'small';
-            
-            const sections = document.querySelectorAll('section');
-            let shadowValue = '';
-            
-            switch(shadow) {
-                case 'small': shadowValue = '0 5px 15px rgba(0,0,0,0.1)'; break;
-                case 'medium': shadowValue = '0 10px 30px rgba(0,0,0,0.15)'; break;
-                case 'large': shadowValue = '0 20px 50px rgba(0,0,0,0.25)'; break;
-                case 'none': shadowValue = 'none'; break;
-            }
-            
-            sections.forEach(section => {
-                section.style.opacity = opacity;
-                section.style.transform = `scale(${scale})`;
-                section.style.borderRadius = radius + 'px';
-                section.style.boxShadow = shadowValue;
-            });
-        }
-
-        // Aplicar cambios a la página
-        function updatePageWithEditorData(data) {
-            if (data.title) {
-                document.querySelectorAll('h1').forEach(h => {
-                    if (h.textContent.includes('Legacy Mac Pros')) {
-                        h.textContent = data.title;
-                    }
-                });
-            }
-        }
-
-        // Cargar datos al abrir la página
+        
+        document.getElementById('editorBtn').onclick = openEd;
+        
         window.addEventListener('load', () => {
-            const saved = localStorage.getItem('legacyMacProData');
-            if (saved) {
-                const data = JSON.parse(saved);
-                updatePageWithEditorData(data);
-                applyEffects();
-            }
-            displayImageGallery();
+            const d = JSON.parse(localStorage.getItem('siteData') || '{}');
+            if(d.t) document.getElementById('titleInp').value = d.t;
+            if(d.d) document.getElementById('descInp').value = d.d;
+            if(d.p) document.getElementById('phoneInp').value = d.p;
+            if(d.e) document.getElementById('emailInp').value = d.e;
+            if(d.c) document.getElementById('colorInp').value = d.c;
         });
     </script>
 </body>
