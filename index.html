@@ -420,10 +420,20 @@
                 <label>Título Principal</label>
                 <input type="text" id="titleInp" placeholder="Legacy Mac Pros">
             </div>
+
+            <div class="form-group">
+                <label>Subtítulo</label>
+                <input type="text" id="subtitleInp" placeholder="Optimize Your Old Mac, Boost Your Future.">
+            </div>
             
             <div class="form-group">
                 <label>Descripción "Who We Are"</label>
                 <textarea id="descInp" placeholder="Descripción..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Descripción de Servicios</label>
+                <textarea id="servicesDescInp" placeholder="Qué servicios ofreces..."></textarea>
             </div>
             
             <div class="form-group">
@@ -437,8 +447,23 @@
             </div>
 
             <div class="form-group">
+                <label>Facebook URL</label>
+                <input type="text" id="facebookInp" placeholder="https://facebook.com/LegacyMacPros">
+            </div>
+
+            <div class="form-group">
+                <label>Instagram URL</label>
+                <input type="text" id="instagramInp" placeholder="https://instagram.com/...">
+            </div>
+
+            <div class="form-group">
                 <label>Color Encabezado</label>
                 <input type="color" id="colorInp" value="#1a3a52">
+            </div>
+
+            <div class="form-group">
+                <label>Color Botones</label>
+                <input type="color" id="buttonColorInp" value="#147ACC">
             </div>
 
             <button class="save-btn" onclick="saveDat()">💾 Guardar</button>
@@ -458,16 +483,29 @@
         function saveDat() {
             const d = {
                 t: document.getElementById('titleInp').value,
+                st: document.getElementById('subtitleInp').value,
                 d: document.getElementById('descInp').value,
+                sd: document.getElementById('servicesDescInp').value,
                 p: document.getElementById('phoneInp').value,
                 e: document.getElementById('emailInp').value,
-                c: document.getElementById('colorInp').value
+                fb: document.getElementById('facebookInp').value,
+                ig: document.getElementById('instagramInp').value,
+                c: document.getElementById('colorInp').value,
+                bc: document.getElementById('buttonColorInp').value
             };
             localStorage.setItem('siteData', JSON.stringify(d));
             
+            // Aplicar cambios
             document.querySelector('header h1').textContent = d.t;
+            document.querySelector('.subtitle').textContent = d.st;
             document.querySelectorAll('section')[0].querySelector('p').textContent = d.d;
             document.querySelector('header').style.background = 'linear-gradient(135deg, ' + d.c + ' 0%, ' + d.c + 'dd 50%, ' + d.c + '99 100%)';
+            
+            // Cambiar color de botones
+            const btns = document.querySelectorAll('.button');
+            btns.forEach(btn => {
+                btn.style.background = 'linear-gradient(135deg, ' + d.bc + ' 0%, ' + d.bc.slice(0, -2) + 'aa 100%)';
+            });
             
             document.getElementById('msgDiv').innerHTML = '✅ Guardado';
             setTimeout(() => { document.getElementById('msgDiv').innerHTML = ''; }, 2000);
@@ -478,10 +516,15 @@
         window.addEventListener('load', () => {
             const d = JSON.parse(localStorage.getItem('siteData') || '{}');
             if(d.t) document.getElementById('titleInp').value = d.t;
+            if(d.st) document.getElementById('subtitleInp').value = d.st;
             if(d.d) document.getElementById('descInp').value = d.d;
+            if(d.sd) document.getElementById('servicesDescInp').value = d.sd;
             if(d.p) document.getElementById('phoneInp').value = d.p;
             if(d.e) document.getElementById('emailInp').value = d.e;
+            if(d.fb) document.getElementById('facebookInp').value = d.fb;
+            if(d.ig) document.getElementById('instagramInp').value = d.ig;
             if(d.c) document.getElementById('colorInp').value = d.c;
+            if(d.bc) document.getElementById('buttonColorInp').value = d.bc;
         });
     </script>
 </body>
