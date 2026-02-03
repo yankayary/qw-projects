@@ -6,11 +6,7 @@
   command = ""
   publish = "."
 
-# Redirect non-existent files to index.html for SPA support
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+# No redirects needed - index.html is the default entry point
 
 [[headers]]
   for = "/*"
