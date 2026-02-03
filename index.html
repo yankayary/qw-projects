@@ -641,13 +641,29 @@
 
     <script>
         // Elementos del editor
-        const editorButton = document.getElementById('editorButton');
-        const editorModal = document.getElementById('editorModal');
+        let editorButton, editorModal;
 
-        // Abrir editor
-        editorButton.addEventListener('click', () => {
-            editorModal.classList.add('active');
-            loadEditorData();
+        // Inicializar cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', () => {
+            editorButton = document.getElementById('editorButton');
+            editorModal = document.getElementById('editorModal');
+
+            // Abrir editor
+            if (editorButton) {
+                editorButton.addEventListener('click', () => {
+                    editorModal.classList.add('active');
+                    loadEditorData();
+                });
+            }
+
+            // Cargar datos al abrir la página
+            const saved = localStorage.getItem('legacyMacProData');
+            if (saved) {
+                const data = JSON.parse(saved);
+                updatePageWithEditorData(data);
+                applyEffects();
+            }
+            displayImageGallery();
         });
 
         // Cerrar editor
@@ -793,8 +809,6 @@
                 applyEffects();
             }
             displayImageGallery();
-
-            }
         });
     </script>
 </body>
