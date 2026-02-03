@@ -6,6 +6,11 @@
   command = ""
   publish = "."
 
+[[redirects]]
+  from = "/editor"
+  to = "/editor.html"
+  status = 200
+
 # No redirects needed - index.html is the default entry point
 
 [[headers]]
