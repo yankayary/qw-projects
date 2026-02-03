@@ -1,0 +1,57 @@
+/*
+ * The Typekit service used to deliver this font or fonts for use on websites
+ * is provided by Adobe and is subject to these Terms of Use
+ * http://www.adobe.com/products/eulas/tou_typekit. For font license
+ * information, see the list below.
+ *
+ * montserrat:
+ *   - http://typekit.com/eulas/00000000000000007735a185
+ *   - http://typekit.com/eulas/00000000000000007735a184
+ *   - http://typekit.com/eulas/00000000000000007735a18b
+ *   - http://typekit.com/eulas/00000000000000007735a18d
+ *   - http://typekit.com/eulas/00000000000000007735a197
+ *   - http://typekit.com/eulas/00000000000000007735a19a
+ *
+ * © 2009-2026 Adobe Systems Incorporated. All Rights Reserved.
+ */
+/*{"last_published":"2025-05-10 19:42:00 UTC"}*/
+
+@import url("https://p.typekit.net/p.css?s=1&k=sfx2csq&ht=tk&f=16353.37456.37460.37461.37466.37467&a=159380450&app=typekit&e=css");
+
+@font-face {
+font-family:"montserrat";
+src:url("https://use.typekit.net/af/10e51f/00000000000000007735a185/31/l?subset_id=2&fvd=n4&v=3") format("woff2"),url("https://use.typekit.net/af/10e51f/00000000000000007735a185/31/d?subset_id=2&fvd=n4&v=3") format("woff"),url("https://use.typekit.net/af/10e51f/00000000000000007735a185/31/a?subset_id=2&fvd=n4&v=3") format("opentype");
+font-display:auto;font-style:normal;font-weight:400;font-stretch:normal;
+}
+
+@font-face {
+font-family:"montserrat";
+src:url("https://use.typekit.net/af/471f89/00000000000000007735a184/31/l?subset_id=2&fvd=n1&v=3") format("woff2"),url("https://use.typekit.net/af/471f89/00000000000000007735a184/31/d?subset_id=2&fvd=n1&v=3") format("woff"),url("https://use.typekit.net/af/471f89/00000000000000007735a184/31/a?subset_id=2&fvd=n1&v=3") format("opentype");
+font-display:auto;font-style:normal;font-weight:100;font-stretch:normal;
+}
+
+@font-face {
+font-family:"montserrat";
+src:url("https://use.typekit.net/af/375f30/00000000000000007735a18b/31/l?subset_id=2&fvd=n3&v=3") format("woff2"),url("https://use.typekit.net/af/375f30/00000000000000007735a18b/31/d?subset_id=2&fvd=n3&v=3") format("woff"),url("https://use.typekit.net/af/375f30/00000000000000007735a18b/31/a?subset_id=2&fvd=n3&v=3") format("opentype");
+font-display:auto;font-style:normal;font-weight:300;font-stretch:normal;
+}
+
+@font-face {
+font-family:"montserrat";
+src:url("https://use.typekit.net/af/97f98a/00000000000000007735a18d/31/l?subset_id=2&fvd=i4&v=3") format("woff2"),url("https://use.typekit.net/af/97f98a/00000000000000007735a18d/31/d?subset_id=2&fvd=i4&v=3") format("woff"),url("https://use.typekit.net/af/97f98a/00000000000000007735a18d/31/a?subset_id=2&fvd=i4&v=3") format("opentype");
+font-display:auto;font-style:italic;font-weight:400;font-stretch:normal;
+}
+
+@font-face {
+font-family:"montserrat";
+src:url("https://use.typekit.net/af/518cb8/00000000000000007735a197/31/l?subset_id=2&fvd=n7&v=3") format("woff2"),url("https://use.typekit.net/af/518cb8/00000000000000007735a197/31/d?subset_id=2&fvd=n7&v=3") format("woff"),url("https://use.typekit.net/af/518cb8/00000000000000007735a197/31/a?subset_id=2&fvd=n7&v=3") format("opentype");
+font-display:auto;font-style:normal;font-weight:700;font-stretch:normal;
+}
+
+@font-face {
+font-family:"montserrat";
+src:url("https://use.typekit.net/af/be365a/00000000000000007735a19a/31/l?subset_id=2&fvd=i7&v=3") format("woff2"),url("https://use.typekit.net/af/be365a/00000000000000007735a19a/31/d?subset_id=2&fvd=i7&v=3") format("woff"),url("https://use.typekit.net/af/be365a/00000000000000007735a19a/31/a?subset_id=2&fvd=i7&v=3") format("opentype");
+font-display:auto;font-style:italic;font-weight:700;font-stretch:normal;
+}
+
+.tk-montserrat { font-family: "montserrat",sans-serif; }
