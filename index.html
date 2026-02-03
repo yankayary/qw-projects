@@ -206,6 +206,154 @@
             section { padding: 35px 20px; }
             .icon-section { grid-template-columns: 1fr; }
         }
+
+        /* EDITOR STYLES */
+        .editor-float-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #147ACC 0%, #0e5aa8 100%);
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1em;
+            box-shadow: 0 6px 20px rgba(20, 122, 204, 0.4);
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+        .editor-float-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(20, 122, 204, 0.6);
+        }
+
+        .editor-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        .editor-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .editor-modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+        .editor-modal-content h2 {
+            color: #1a3a52;
+            margin-bottom: 20px;
+        }
+
+        .editor-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #999;
+        }
+        .editor-close:hover {
+            color: #333;
+        }
+
+        .editor-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            color: #999;
+            font-weight: 600;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .tab-btn.active {
+            color: #147ACC;
+            border-bottom-color: #147ACC;
+        }
+
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1a3a52;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1em;
+        }
+        .form-group textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #147ACC;
+            box-shadow: 0 0 8px rgba(20, 122, 204, 0.2);
+        }
+
+        .save-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #147ACC 0%, #0e5aa8 100%);
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+        .save-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(20, 122, 204, 0.4);
+        }
+
+        .editor-message {
+            margin-top: 10px;
+            text-align: center;
+            color: #28a745;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
@@ -379,155 +527,6 @@
             <div id="editorMessage" class="editor-message"></div>
         </div>
     </div>
-
-    <style>
-        .editor-float-button {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: linear-gradient(135deg, #147ACC 0%, #0e5aa8 100%);
-            color: white;
-            border: none;
-            padding: 15px 20px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 1em;
-            box-shadow: 0 6px 20px rgba(20, 122, 204, 0.4);
-            z-index: 999;
-            transition: all 0.3s ease;
-        }
-        .editor-float-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(20, 122, 204, 0.6);
-        }
-
-        .editor-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            overflow-y: auto;
-        }
-        .editor-modal.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .editor-modal-content {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            max-width: 500px;
-            width: 90%;
-            position: relative;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-        }
-        .editor-modal-content h2 {
-            color: #1a3a52;
-            margin-bottom: 20px;
-        }
-
-        .editor-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: none;
-            border: none;
-            font-size: 1.5em;
-            cursor: pointer;
-            color: #999;
-        }
-        .editor-close:hover {
-            color: #333;
-        }
-
-        .editor-tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #e0e0e0;
-        }
-        .tab-btn {
-            background: none;
-            border: none;
-            padding: 10px 15px;
-            cursor: pointer;
-            color: #999;
-            font-weight: 600;
-            border-bottom: 3px solid transparent;
-            transition: all 0.3s ease;
-        }
-        .tab-btn.active {
-            color: #147ACC;
-            border-bottom-color: #147ACC;
-        }
-
-        .tab-content {
-            display: none;
-        }
-        .tab-content.active {
-            display: block;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #1a3a52;
-        }
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 10px;
-            border: 2px solid #e0e0e0;
-            border-radius: 5px;
-            font-family: inherit;
-            font-size: 1em;
-        }
-        .form-group textarea {
-            min-height: 80px;
-            resize: vertical;
-        }
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #147ACC;
-            box-shadow: 0 0 8px rgba(20, 122, 204, 0.2);
-        }
-
-        .save-btn {
-            width: 100%;
-            background: linear-gradient(135deg, #147ACC 0%, #0e5aa8 100%);
-            color: white;
-            padding: 12px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 1em;
-            transition: all 0.3s ease;
-        }
-        .save-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(20, 122, 204, 0.4);
-        }
-
-        .editor-message {
-            margin-top: 10px;
-            text-align: center;
-            color: #28a745;
-            font-weight: 600;
-        }
-    </style>
 
     <script>
         // Elementos del editor
