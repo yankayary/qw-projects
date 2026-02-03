@@ -1,0 +1,27 @@
+backend:
+  name: github
+  repo: yankayary/qw-projects
+  branch: main
+  auth_endpoint: /api/auth
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "content"
+    label: "Contenido del Sitio"
+    folder: "_data"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Título del Sitio", name: "site_title", widget: "string", default: "Legacy Mac Pros"}
+      - {label: "Subtítulo", name: "subtitle", widget: "string", default: "Optimize Your Old Mac, Boost Your Future."}
+      
+  - name: "pages"
+    label: "Páginas"
+    folder: "_pages"
+    create: true
+    fields:
+      - {label: "Título", name: "title", widget: "string"}
+      - {label: "Contenido", name: "body", widget: "markdown"}
+      - {label: "Publicado", name: "published", widget: "boolean", default: true}
