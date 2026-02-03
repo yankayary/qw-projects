@@ -7,23 +7,144 @@
     <meta name="description" content="Legacy Mac Pros TI - Optimize, upgrade, and modernize your old Mac">
     <meta name="robots" content="index, follow">
     <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 0; padding: 0; color: #333; }
-        header { background-color: #484848; color: white; padding: 60px 20px; text-align: center; }
-        h1 { font-size: 2.5em; margin: 0 0 10px 0; }
-        .subtitle { font-size: 1.2em; margin: 0; }
-        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
-        section { margin-bottom: 50px; }
-        h2 { font-size: 1.8em; color: #484848; border-bottom: 2px solid #147ACC; padding-bottom: 10px; }
-        h3, h4 { color: #555; }
-        p { margin: 10px 0; }
-        ul, ol { margin: 15px 0; padding-left: 30px; }
-        li { margin: 8px 0; }
-        a { color: #147ACC; text-decoration: none; }
-        a:hover { text-decoration: underline; }
-        .button { display: inline-block; background-color: #147ACC; color: white; padding: 12px 30px; border-radius: 4px; margin: 15px 10px 15px 0; text-decoration: none; font-weight: bold; }
-        .button:hover { background-color: #0e5aa8; }
-        .info-box { background-color: #f0f0f0; padding: 20px; border-left: 4px solid #147ACC; margin: 20px 0; }
-        footer { background-color: #2d2d2d; color: white; padding: 30px 20px; text-align: center; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            line-height: 1.7; 
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        header { 
+            background: linear-gradient(135deg, #3e6888 0%, #2d2d2d 100%);
+            color: white; 
+            padding: 120px 20px; 
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="1200" height="600" fill="url(%23pattern)"/></svg>');
+            opacity: 0.3;
+        }
+        header h1 { 
+            font-size: 3.5em; 
+            margin-bottom: 15px; 
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .subtitle { 
+            font-size: 1.4em; 
+            margin: 0;
+            position: relative;
+            z-index: 1;
+            font-weight: 300;
+            opacity: 0.95;
+        }
+        .container { 
+            max-width: 1100px; 
+            margin: 0 auto; 
+            padding: 0 20px;
+        }
+        section { 
+            margin: 80px 0; 
+            background: white;
+            padding: 50px 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        h2 { 
+            font-size: 2.2em; 
+            color: #3e6888; 
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #147ACC;
+            display: inline-block;
+        }
+        h3, h4 { 
+            color: #2d2d2d;
+            margin-top: 20px;
+            margin-bottom: 15px;
+        }
+        h3 { font-size: 1.5em; }
+        h4 { font-size: 1.1em; }
+        p { 
+            margin-bottom: 15px; 
+            font-size: 1.05em;
+            line-height: 1.8;
+        }
+        ul, ol { 
+            margin: 20px 0 20px 30px; 
+            padding-left: 10px;
+        }
+        li { 
+            margin-bottom: 12px; 
+            font-size: 1.02em;
+        }
+        a { 
+            color: #147ACC; 
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        a:hover { 
+            color: #0e5aa8;
+            text-decoration: underline;
+        }
+        .button { 
+            display: inline-block; 
+            background: linear-gradient(135deg, #147ACC 0%, #0e5aa8 100%);
+            color: white; 
+            padding: 14px 35px; 
+            border-radius: 50px; 
+            margin: 20px 10px 20px 0; 
+            text-decoration: none; 
+            font-weight: 600;
+            font-size: 1.05em;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(20, 122, 204, 0.4);
+            border: none;
+            cursor: pointer;
+        }
+        .button:hover { 
+            background: linear-gradient(135deg, #0e5aa8 0%, #094285 100%);
+            box-shadow: 0 6px 25px rgba(20, 122, 204, 0.6);
+            transform: translateY(-2px);
+        }
+        .info-box { 
+            background: linear-gradient(135deg, #f0f7ff 0%, #e8f2ff 100%);
+            padding: 30px;
+            border-left: 5px solid #147ACC; 
+            margin: 30px 0; 
+            border-radius: 8px;
+        }
+        .info-box p { margin: 12px 0; }
+        footer { 
+            background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+            color: white; 
+            padding: 50px 20px;
+            text-align: center; 
+            margin-top: 100px;
+        }
+        footer p { margin: 8px 0; }
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.2em; }
+            .subtitle { font-size: 1.1em; }
+            h2 { font-size: 1.6em; }
+            section { padding: 30px 20px; }
+        }
     </style>
 </head>
 <body>
