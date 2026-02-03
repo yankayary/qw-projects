@@ -6,9 +6,10 @@
   command = ""
   publish = "."
 
+# Redirect non-existent files to index.html for SPA support
 [[redirects]]
   from = "/*"
-  to = "/Q&W Projects.html"
+  to = "/index.html"
   status = 200
 
 [[headers]]
